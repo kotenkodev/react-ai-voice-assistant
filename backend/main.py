@@ -4,8 +4,9 @@ from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from decouple import config
-from openai import OpenAI
 from dotenv import load_dotenv
+
+from functions.openai_requests import convert_audio_to_text
 
 load_dotenv()
 
@@ -29,6 +30,10 @@ app.add_middleware(
 async def root():
     return {"message": "I'm alive"}
 
-@app.post('/post-audio/')
-async def post_audio(file: UploadFile = File(...)):
-    return {"message": "Audio received"}
+@app.get('/post-audio-get/')
+async def get_audio():
+
+    audio_input = open('voice-snippet.mp3', 'rb')
+
+    text = convert_audio_to_text(audio_input)
+    return {"message": text}
