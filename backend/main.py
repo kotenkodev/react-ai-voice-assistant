@@ -1,3 +1,5 @@
+from functions.openai_requests import get_chat_response
+from fastapi import HTTPException
 from fastapi import File
 from fastapi import UploadFile
 from fastapi import FastAPI
@@ -35,5 +37,11 @@ async def get_audio():
 
     audio_input = open('voice-snippet.mp3', 'rb')
 
-    text = convert_audio_to_text(audio_input)
-    return {"message": text}
+    message_decoded = convert_audio_to_text(audio_input)
+
+    if not message_decoded:
+        return HTTPException(status_code=400, detail="Failed to decode audio")
+
+    chat_response = get_chat_response(message_decoded)
+
+    return {"message": chat_response}
