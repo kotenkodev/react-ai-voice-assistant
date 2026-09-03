@@ -14,7 +14,6 @@
   }
 }
 
-/* Custom scrollbar for cyber/sleek UI */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -32,7 +31,6 @@
   background: rgba(56, 189, 248, 0.4);
 }
 
-/* Keyframe Animations */
 @keyframes float {
   0%,
   100% {

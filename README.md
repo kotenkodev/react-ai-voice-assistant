@@ -45,17 +45,18 @@ sequenceDiagram
 
 ## Tech Stack
 
-| Layer | Technologies |
-|---|---|
-| **Frontend** | React 19, TypeScript, Vite, Tailwind CSS, Axios, React Media Recorder |
-| **Backend** | Python 3.14, FastAPI, Uvicorn, Python-Decouple, Python-Dotenv |
-| **AI Models** | Groq (`whisper-large-v3`, `openai/gpt-oss-20b`), ElevenLabs TTS |
+| Layer         | Technologies                                                          |
+| ------------- | --------------------------------------------------------------------- |
+| **Frontend**  | React 19, TypeScript, Vite, Tailwind CSS, Axios, React Media Recorder |
+| **Backend**   | Python 3.14, FastAPI, Uvicorn, Python-Decouple, Python-Dotenv         |
+| **AI Models** | Groq (`whisper-large-v3`, `openai/gpt-oss-20b`), ElevenLabs TTS       |
 
 ---
 
 ## Quick Start
 
 ### 1. Prerequisites
+
 - **Node.js**: v18+ installed
 - **Python**: v3.10+ installed (Python 3.14 recommended)
 - **API Keys**:
@@ -79,6 +80,7 @@ cp .env.example .env
 ```
 
 Edit `backend/.env`:
+
 ```env
 GROQ_API_KEY=your_groq_api_key_here
 ELEVENLABS_API_KEY=your_elevenlabs_api_key_here
@@ -87,9 +89,11 @@ CORS=http://localhost:5173
 ```
 
 Run the backend server:
+
 ```bash
 uvicorn main:app --reload
 ```
+
 Backend runs at `http://localhost:8000`.
 
 ---
@@ -107,14 +111,17 @@ cp .env.example .env
 ```
 
 Edit `frontend/.env`:
+
 ```env
 VITE_API_URL=http://localhost:8000
 ```
 
 Start the Vite development server:
+
 ```bash
 npm run dev
 ```
+
 Frontend runs at `http://localhost:5173`.
 
 ---
@@ -147,9 +154,3 @@ fastapi-react-voice-assistant/
 │   └── package.json
 └── README.md
 ```
-
----
-
-## License
-
-MIT License. Feel free to use this project as a foundation for your own AI voice applications!
