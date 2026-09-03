@@ -1,3 +1,5 @@
+from functions.database import reset_messages
+from functions.database import store_messages
 from functions.openai_requests import get_chat_response
 from fastapi import HTTPException
 from fastapi import File
@@ -32,6 +34,12 @@ app.add_middleware(
 async def root():
     return {"message": "I'm alive"}
 
+
+@app.get('/reset')
+async def reset_conversation():
+    reset_messages()
+    return {"message": "Conversation reset"}
+
 @app.get('/post-audio-get/')
 async def get_audio():
 
@@ -43,5 +51,7 @@ async def get_audio():
         return HTTPException(status_code=400, detail="Failed to decode audio")
 
     chat_response = get_chat_response(message_decoded)
+
+    store_messages(message_decoded, chat_response)
 
     return {"message": chat_response}
