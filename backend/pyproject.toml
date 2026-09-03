@@ -8,6 +8,7 @@ dependencies = [
     "openai",
     "python-decouple",
     "python-dotenv",
+    "requests>=2.34.2",
 ]
 
 [tool.pyright]

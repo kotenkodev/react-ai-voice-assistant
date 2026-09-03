@@ -1,3 +1,4 @@
+from functions.text_to_speech import convert_text_to_speech
 from functions.database import reset_messages
 from functions.database import store_messages
 from functions.openai_requests import get_chat_response
@@ -52,6 +53,17 @@ async def get_audio():
 
     chat_response = get_chat_response(message_decoded)
 
+    if not chat_response:
+        return HTTPException(status_code=400, detail="Failed to get chat response")
+
     store_messages(message_decoded, chat_response)
 
-    return {"message": chat_response}
+    audio_output = convert_text_to_speech(chat_response)
+
+    if not audio_output:
+        return HTTPException(status_code=400, detail="Failed to convert text to speech")
+
+    def iterfile():
+        yield audio_output
+
+    return StreamingResponse(iterfile(), media_type="audio/mpeg")
